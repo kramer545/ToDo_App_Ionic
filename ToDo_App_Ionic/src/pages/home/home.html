@@ -1,0 +1,17 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			To-Do List
+		</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon></button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list>
+		<!-- creates multiple ion items for each item -->
+		<ion-item *ngFor="let item of todoItems" (click)="viewItem(item)">{{item.taskCont}}</ion-item>
+	</ion-list>
+</ion-content>
