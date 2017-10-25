@@ -3,10 +3,13 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpModule } from '@angular/http';
+import {IonicStorageModule} from '@ionic/Storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AddNewItemPage } from '../pages/add-new-item/add-new-item'
+import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { AddNewItemPage } from '../pages/add-new-item/add-new-item'
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+	HttpModule,
+    IonicModule.forRoot(MyApp),
+	IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,6 +32,8 @@ import { AddNewItemPage } from '../pages/add-new-item/add-new-item'
   providers: [
     StatusBar,
     SplashScreen,
+	DataProvider,
+	Storage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
