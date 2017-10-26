@@ -9,13 +9,16 @@ import {IonicStorageModule} from '@ionic/Storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AddNewItemPage } from '../pages/add-new-item/add-new-item'
+import { LoginPage } from '../pages/login/login';
 import { DataProvider } from '../providers/data/data';
+import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-	AddNewItemPage
+	AddNewItemPage,
+	LoginPage
   ],
   imports: [
     BrowserModule,
@@ -27,14 +30,16 @@ import { DataProvider } from '../providers/data/data';
   entryComponents: [
     MyApp,
     HomePage,
-	AddNewItemPage
+	AddNewItemPage,
+	LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
 	DataProvider,
 	Storage,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthLoginProvider
   ]
 })
 export class AppModule {}
