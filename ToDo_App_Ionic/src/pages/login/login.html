@@ -24,6 +24,10 @@
 		  <ion-label floating>Password</ion-label>
 		  <ion-input type="text" [(ngModel)]="passworde"></ion-input>
 		</ion-item>
+		
+		<ion-item>
+			<ion-label>{{errorMsg}}</ion-label> <!-- updates if login failed or error -->
+		</ion-item>
 	
 	</ion-list>
 	

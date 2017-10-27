@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, AlertController, NavController, NavParams, ViewController } from 'ionic-angular';
 import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -20,6 +21,8 @@ export class LoginPage {
 	username: string;
 	passworde: string;
 	isLoggedIn: boolean;
+	currUser;
+	errorMsg: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, public loginService: AuthLoginProvider) {
   }
@@ -31,7 +34,20 @@ export class LoginPage {
   login()
   {
 	let user = {username: this.username, passworde: this.passworde};
-	this.loginService.logine(user).then((currUser)=>{if(currUser){this.view.dismiss(currUser);}});
+	this.errorMsg = "";
+	this.loginService.login(user).subscribe(allowed=> {
+		if(allowed){
+			console.log("Allowed");
+			this.navCtrl.push(HomePage);
+		}
+		else {
+			console.log("Denied");
+			this.errorMsg = "Access Denied";
+		}
+	},
+	error => {
+		this.errorMsg = "Error Occured";
+	});
 	//let credPassword = {passworde: this.passworde};
 	//this.view.dismiss(isLoggedIn);//,credPassword);
   }
