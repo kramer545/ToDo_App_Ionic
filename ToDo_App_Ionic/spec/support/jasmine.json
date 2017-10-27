@@ -1,0 +1,14 @@
+{
+  "spec_dir": "spec",
+  "spec_files": [
+	"PlayerSpec.js",
+	"auth-loginSpec.ts",
+    "**/*[sS]pec.js",
+	"**/*[sS]pec.ts"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+}

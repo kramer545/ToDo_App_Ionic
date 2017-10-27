@@ -9,9 +9,10 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 	<ion-list>
-		<!-- creates multiple ion items for each item -->
-		<ion-item *ngFor="let item of todoItems" (click)="removeItem(item)">{{item.taskCont}}</ion-item>
+		<!-- creates multiple ion items for each item, every 2nd item has diffrent background color -->
+		<!-- TODO fix background color overhang -->
+		<ion-item *ngFor="let item of todoItems; let i = index;" [ngClass]="(i % 2 == 0) ? 'even' : 'odd'" (click)="removeItem(item)">{{item.taskCont}}</ion-item>
 	</ion-list>
 </ion-content>

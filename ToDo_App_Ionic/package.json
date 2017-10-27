@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
+    "jasmine": "^2.8.0",
     "typescript": "2.3.4"
   },
   "description": "An Ionic project"

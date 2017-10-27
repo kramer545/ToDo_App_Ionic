@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+//import { Injectable } from '@angular/core';
+const Injectable = require ('@angular/core');
 import { Http } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import { Storage } from '@ionic/Storage'; //used to store data
@@ -7,6 +8,25 @@ import 'rxjs/add/operator/map';
 
 //import md5 = require('js-md5');
 import * as md5 from 'js-md5';
+
+describe("Player", function() {
+  var Player = require('../../lib/jasmine_examples/Player');
+  var Song = require('../../lib/jasmine_examples/Song');
+  var player;
+  var song;
+
+  beforeEach(function() {
+    player = new Player();
+    song = new Song();
+  });
+
+  it("should be able to play a Song", function() {
+    player.play(song);
+    expect(player.currentlyPlayingSong).toEqual(song);
+
+    //demonstrates use of custom matcher
+    expect(player).toBePlaying(song);
+  });
 
 /*
   Generated class for the AuthLoginProvider provider.
@@ -77,3 +97,13 @@ export class AuthLoginProvider {
   }
 
 }
+
+describe( "Convert library", function () {
+    describe( "distance converter", function () {
+
+        });
+
+        describe( "volume converter", function () {
+
+    });
+});

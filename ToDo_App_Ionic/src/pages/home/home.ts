@@ -16,7 +16,18 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: DataProvider, public navParams: NavParams) {
 	this.username = navParams.get("username");
-	this.dataService.getData(this.username).then((todos)=>{if(todos){this.todoItems = todos}}); //get tasks from storage, if exists assign to item
+	//this.dataService.getData(this.username).then((todos)=>{if(todos){this.todoItems = todos}}); //get tasks from storage, if exists assign to item
+	this.dataService.getData(this.username).subscribe(todos => {
+		if(todos && todos != undefined){
+			this.todoItems = todos;
+		}
+		else { //for when it can't find todos
+			console.log("not todos");
+		}
+	},
+	error => {
+		console.log("error occured getting todos");
+	});
 	
   }
   
