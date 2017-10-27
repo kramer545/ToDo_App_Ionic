@@ -35,7 +35,7 @@ export class AuthLoginProvider {
     //console.log('Hello AuthLoginProvider Provider');
 	//insert 2 users in storage for testing
 	this.currUser = new User("user1",md5("user1"));
-	this.storage.set('user1',this.currUser);
+	this.storage.set('user1',new User("user1",md5("user1")));
 	this.storage.set('user2',new User("user2",md5("user2")));
   }
   
@@ -50,12 +50,8 @@ export class AuthLoginProvider {
 			this.getUser(user.username).then((currUser)=>{
 			  if(currUser){
 				  this.currUser = currUser;
-				  console.log(currUser);
-				  console.log(md5(user.passworde));
-				  console.log(md5(user.passworde) === currUser.passworde);
 				  if(md5(user.passworde) === currUser.passworde)
 				  {
-					  console.log("login worked");
 					  let access = true;
 					  observer.next(access);
 					  observer.complete();
@@ -77,35 +73,7 @@ export class AuthLoginProvider {
 		}
 	}
   
-  /*
-  logine(user)
-  {
-	console.log(user.username+" "+user.passworde);
-	  if(user.username === undefined || user.passworde === undefined)
-	  {
-		  console.log("not all creds filled out");
-	  }
-	  else
-	  {
-		  //make request to get a user from the database
-		  this.getUser(user.username).then((currUser)=>{
-			  if(currUser){
-				  this.currUser = currUser;
-				  console.log(currUser);
-				  console.log(md5(user.passworde));
-				  console.log(md5(user.passworde) === currUser.passworde);
-				  if(md5(user.passworde) === currUser.passworde)
-				  {
-					  console.log("login worked");
-					  return this.currUser;
-				  }
-				  }}); //get tasks from storage, if exists assign to item
-	  }
-	  return currUser;
-  }
-  */
-  
-  getUser(username)
+  getUser(username) //promise function
   {
 	  return this.storage.get(username);
   }

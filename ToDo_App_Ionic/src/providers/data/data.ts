@@ -18,14 +18,15 @@ export class DataProvider {
     console.log('Hello DataProvider Provider');
   }
   
-  getData() //retrieve data from storage
+  getData(username) //retrieve data from storage
   {
-	  return this.storage.get('todos');
+	  console.log(username);
+	  return this.storage.get(username+'todos');
   }
   
-  saveData(data) //update storage data
+  saveData(data,username) //update storage data
   {
-	  this.storage.set('todos',data);
+	  this.storage.set(username+'todos',data);
   }
 
 }

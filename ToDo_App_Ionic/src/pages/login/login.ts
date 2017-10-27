@@ -20,36 +20,33 @@ export class LoginPage {
 	
 	username: string;
 	passworde: string;
-	isLoggedIn: boolean;
-	currUser;
 	errorMsg: string = "";
+	loggedInUsername:string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, public loginService: AuthLoginProvider) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+	  
   }
   
   login()
   {
+	
 	let user = {username: this.username, passworde: this.passworde};
-	this.errorMsg = "";
+	this.errorMsg = ""; //resets errorMsg
+	this.loggedInUsername = this.username;
 	this.loginService.login(user).subscribe(allowed=> {
 		if(allowed){
-			console.log("Allowed");
-			this.navCtrl.push(HomePage);
+			this.navCtrl.push(HomePage, {username:this.loggedInUsername}); //go to homepgae
 		}
 		else {
-			console.log("Denied");
 			this.errorMsg = "Access Denied";
 		}
 	},
 	error => {
 		this.errorMsg = "Error Occured";
 	});
-	//let credPassword = {passworde: this.passworde};
-	//this.view.dismiss(isLoggedIn);//,credPassword);
+	//clear form data, as returning from homepage leaves the values up
+	this.username = "";
+	this.passworde = "";
   }
 
 }

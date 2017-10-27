@@ -24,9 +24,17 @@ export class AddNewItemPage {
   
   saveItem()
   {
-	  let newTask = {taskCont: this.taskCont};
-	  //closes this page, goes back to home w/ new task
-	  this.view.dismiss(newTask);
+	  //catch unfilled and just spaces and don't add them to list
+	  if(this.taskCont === undefined)
+		  this.view.dismiss();
+	  else if (this.taskCont.trim() == "")
+		  this.view.dismiss();
+	  else
+	  { 
+		  let newTask = {taskCont: this.taskCont.trim()};
+		  //closes this page, goes back to home w/ new task
+		  this.view.dismiss(newTask);
+	  }
   }
   
   close()
