@@ -1,3 +1,4 @@
+import {} from 'jasmine';
 import { async, TestBed, inject } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NavController , ModalController, NavParams } from 'ionic-angular';
@@ -57,10 +58,13 @@ describe('HomePage Tests', () => {
 	//storage: Storage
 	//loginBackend = TestBed.createComponent(DataProvider).componentInstance;
 	//this.storage.set('test',['item1','item2']);
-		dataProvider.saveData(['test1','test2'],"test");
+	dataProvider.saveData(['test1','test2'],"test");
   }));
-  
+   //NOTE TIMEOUT is used for each test that relies on beforeEach to reset the test data, since the testing doesnt wait for it, and .then doesnt work
+   //not having timeout results in all tests passing or failing at random
+   
   it('retrieveing todos works', inject( [DataProvider], ( dataProvider ) =>{
+	  setTimeout(function() {
 	  return dataProvider.getData("test").toPromise().then(todos => {
 		if(todos && todos != undefined){
 			expect(todos.length).toBe(2);
@@ -74,10 +78,11 @@ describe('HomePage Tests', () => {
 		console.log("error occured getting todos");
 		expect(false).toBe(true);
 	});
-	
+	}, 1000);
 	}));
   
   it('saving data works', inject( [DataProvider], ( dataProvider ) =>{
+	  setTimeout(function() {
 	  dataProvider.saveData(['test1','test2','test3'],"test");
 	  setTimeout(function () { //since storage.set DOESNT WANT TO TELL ME WHEN ITS DONE, I simply wait a second, which should be plenty of time
 		  return dataProvider.getData("test").toPromise().then(todos => {
@@ -94,7 +99,50 @@ describe('HomePage Tests', () => {
 				expect(false).toBe(true);
 			});
 	  }, 1000);
+	  },1000);
+	}));
+	
+	
+	it('retrieveing todos works after updating values', inject( [DataProvider], ( dataProvider ) =>{ //same test as first test
+		setTimeout(function() {
+	  return dataProvider.getData("test").toPromise().then(todos => {
+		if(todos && todos != undefined){
+			expect(todos.length).toBe(2);
+		}
+		else { //for when it can't find todos
+			expect(false).toBe(true);
+		}
+	},
+	error => {
+		expect(false).toBe(true);
 	});
+		},1000);
+	
+	}));
+	
+	it('testing bad login', inject( [AuthLoginProvider], ( loginService ) =>{
+		setTimeout(function() {
+			let user = {username: "user1", passworde: "user1"};
+	  return this.loginService.login(user).toPromise.then(allowed=> {
+			expect(allowed).toBe(true);
+		},
+		error => {
+			expect(false).toBe(true);
+		});
+		},1000);
+		}));
+		
+	it('testing good login', inject( [AuthLoginProvider], ( loginService ) =>{
+		setTimeout(function() {
+			let user = {username: "user", passworde: "user"};
+	  return this.loginService.login(user).toPromise.then(allowed=> {
+			expect(allowed).toBe(false);
+		},
+		error => {
+			expect(false).toBe(true);
+		});
+		},1000);
+	}));
 });
 /*
 @Component({
