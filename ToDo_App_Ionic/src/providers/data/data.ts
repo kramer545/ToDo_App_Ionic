@@ -16,7 +16,6 @@ import {Observable} from 'rxjs/Observable';
 export class DataProvider {
 
   constructor(public http: Http, public storage: Storage) {
-    console.log('Hello DataProvider Provider');
   }
   
   /*
@@ -30,7 +29,6 @@ export class DataProvider {
   getData(username)
   {
 	  return Observable.create(observer => {
-			console.log(username);
 			this.retrieveData(username).then((todo)=>{ //promise function, needed or else just skips waiting for backend and returns undefined
 			  if(todo){
 				  let todos = todo;
@@ -47,12 +45,20 @@ export class DataProvider {
   }
   
   retrieveData(username) { //promise function to get data
-	  return this.storage.get(username+'todos');
+	return this.storage.get(username+'todos');
   }
   
   saveData(data,username) //update storage data
   {
 	  this.storage.set(username+'todos',data);
+  }
+  
+  saveDataTest(data,username)
+  {
+	 this.storage.set(username+'todos',data);
+	 this.retrieveData(username).then(data => {
+		 return data;
+		});
   }
 
 }
