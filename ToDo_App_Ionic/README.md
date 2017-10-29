@@ -5,7 +5,8 @@ Setup:
 1. Download the project, navigate to the download location folder, and open the console.
 2. If Ionic is not installed, run this command in the console "npm install -g cordova ionic".
 3. If Typescript is not installed, run this command "npm install -g typescript".
-4. (Optional) If you want to run the tests, type in "npm install --save-dev angular2-template-loader html-loader jasmine jasmine-spec-reporter karma karma-chrome-launcher karma-jasmine karma-jasmine-html-reporter karma-sourcemap-loader karma-webpack karma-coverage-istanbul-reporter istanbul-instrumenter-loader null-loader protractor ts-loader ts-node @types/jasmine @types/node".
+4. If Javascript MD5 is not installed, run "npm install js-md5".
+5. (Optional) If you want to run the tests, type in "npm install --save-dev angular2-template-loader html-loader jasmine jasmine-spec-reporter karma karma-chrome-launcher karma-jasmine karma-jasmine-html-reporter karma-sourcemap-loader karma-webpack karma-coverage-istanbul-reporter istanbul-instrumenter-loader null-loader protractor ts-loader ts-node @types/jasmine @types/node".
 
 Use (Browser Emulator):
 1. Open the console and navigate to the folder the project was downloaded to.
